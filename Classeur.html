@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .reponse{
+            display:none;
+        }
+        .block{
+            display: block;
+            padding:10px;
+            margin:10px;
+            border-style: none;
+            width:100eh;
+            height: 5ev;
+            background-color:rgb(207, 229, 253);
+            border-radius: 10px;
+        }
+        .button{
+            background-color:rgb(68, 92, 226);
+            border-radius: 10px;
+        }
+    </style>
+        
+</head>
+<body>
+    <form>
+<h1>Titre du questionnaire</h1><div><div>Situation</div>
+<div class='block'>
+<input type='checkbox' data-pts='3'>
+<label for=''>contenu d'une réponse pertinante</label><br>
+<span class='reponse'>Raison de la pertinance : 3pt(s) </span>
+</div>
+<div class='block'>
+<input type='checkbox' data-pts='-1'>
+<label for=''>Contenu d'une réponse erronée</label><br>
+<span class='reponse'>Commentaire pour expliquer pourquoi c'est pas bon : -1pt(s) </span>
+</div>
+<div class='block'>
+<input type='checkbox' data-pts='1'>
+<label for=''>Contenu d'une réponse peu pertinante</label><br>
+<span class='reponse'> Commentaire sur la pertinance : 1pt(s) </span>
+</div>
+            <span onclick="valider()" class="block button">Valider</span>
+        </div>
+    </form>
+    <div class="reponse">
+        Résultat : <span id="score"></span>
+    </div>
+</body>
+    <script>
+         function valider(){
+            var score = 0
+			
+            var lesReponses=document.getElementsByClassName('reponse');
+            var NbReponse=lesReponses.length;
+            for (var i=0; i<lesReponses.length;i++){
+                lesReponses[i].style.display='block';
+            }
+			
+            var el=document.getElementsByTagName("input")
+			for (var i = 0; i < el.length; i++) {
+				if(el[i].checked)(score+=Number(el[i].dataset.pts))
+				if(Number(el[i].dataset.pts)<0){el[i].parentElement.style.backgroundColor="#FDE5CF"}
+
+			}
+            
+            document.getElementById("score").innerHTML = score + "/" + 4
+        }
+    </script>
+</html>
